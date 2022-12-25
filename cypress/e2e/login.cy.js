@@ -1,4 +1,7 @@
 import { faker } from '@faker-js/faker';
+import { locators } from '../locators';
+import { loginUser } from '../utils'
+
 
 describe('login', () => {
     beforeEach(() => {
@@ -6,21 +9,19 @@ describe('login', () => {
     })
     
    it('Login with valid credentials', () => {
-    cy.get('[name="email"]').type('irina.karanovic@gmail.com')
-    cy.get('[type="password"]').type('BakicaVukica')
-    cy.get('.vs-u-text--left > .vs-c-btn').click();  
+     loginUser('irina.karanovic@gmail.com', 'BakicaVukica')
    })
 
    it('Login without enter email', () => {
-    cy.get('[type="password"]').type('BakicaVukica')
-    cy.get('.vs-u-text--left > .vs-c-btn').click();  
+    cy.get(locators.login.password).type(faker.internet.password())
+    cy.get(locators.login.submit).click();  
     cy.contains('The email field must be a valid email').should('be.visible')
    });
 
    it('With wrong credentials', () => {
-    cy.get('[name="email"]').type(faker.internet.email())
-    cy.get('[type="password"]').type(faker.internet.password())
-    cy.get('.vs-u-text--left > .vs-c-btn').click()
+    cy.get(locators.login.email).type(faker.internet.email())
+    cy.get(locators.login.password).type(faker.internet.password())
+    cy.get(locators.login.submit).click()
     cy.contains('Oops! Your email/password combination is incorrec').should('be.visible')
    });
 });
