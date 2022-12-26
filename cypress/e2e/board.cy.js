@@ -10,35 +10,42 @@ describe('Board', () => {
         cy.visit('/my-organizations')
     });
 
-   it('Add Board', () => {
+   it.only('Add Board', () => {
    
-    cy.get('[title="Add new Board"]').click()
-    cy.get('.vs-input-border > input').type(mockData.boardTitle)
-    cy.get('[name="next_btn"]').click()
-    cy.get(':nth-child(2) > .vs-c-radio > .vs-c-radio-check').click()
-    cy.get('[name="next_btn"]').click()
-    cy.get('[name="next_btn"]').click();
-    cy.get('.el-button--success').first().click();
+    cy.get(locators.board.addNewBoard).click()
+    cy.get(locators.board.inputTitle).type(mockData.boardTitle)
+    cy.get(locators.board.nextBtn).click()
+    cy.get(locators.board.kanabOption).click()
+    cy.get(locators.board.nextBtn).click()
+    cy.get(locators.board.nextBtn).click();
+    cy.get(locators.board.nextBtn).click();
+    cy.get(locators.board.nextBtn).click();
+    cy.get(locators.board.succesBtn).first().click();
    })
 
 
    it('Archive Board', () => {
   
-    cy.get('.vs-c-my-organization__content').first().click()
+    cy.get(locators.board.myOrgFirstClick).first().click()
 
-    if(cy.get('.vs-c-modal--features-button > .vs-c-btn')) {
-        cy.get('.vs-c-modal--features-button > .vs-c-btn').click()
+    if(cy.get(locators.board.modFeaturesBtn)) {
+
+       cy.get(locators.board.modFeaturesBtn).click()
     }
 
-    cy.get('.vs-c-boards-item__header .el-tooltip').first().click({force:true})
-    cy.get('[name="save-btn"]').click();
+    cy.get(locators.board.boardsTooltip).first().click({force:true})
+    cy.get(locators.board.saveBtn).click();
 
    })
 
    it('Remove Board', () => {
   
-    cy.get('.vs-c-my-organization__content').first().click()
-    cy.get('.vs-c-boards-item__header .el-tooltip').first().click({force:true})
-    cy.get('[name="save-btn"]').click();
+    cy.get(locators.board.myOrgFirstClick).first().click()
+    cy.get(locators.board.boardsTooltip).first().click({force:true})
+    cy.get(locators.board.saveBtn).click();
+   })
+
+   it.skip('Test program', () => {
+    cy.visit('/my-organizations')
    })
 })

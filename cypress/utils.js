@@ -1,7 +1,7 @@
 import { locators } from './locators';
 
 export const mockData = {
-   boardTitle:'MY-new Board',
+   boardTitle:'Markov BOrd',
    
 }
 
